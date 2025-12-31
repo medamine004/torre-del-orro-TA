@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouteilles Premium - Torre del Oro</title>
+
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #F6E8C8;
+            color: #4A3723;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        html {
+            font-size: clamp(14px, 3.8vw, 16px);
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 10px 20px 40px;
+            background-color: #F6E8C8;
+        }
+
+        .logo-container img {
+            width: 380px;
+            max-width: 90vw;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+            animation: logoSimpleAppear 1.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes logoSimpleAppear { to { opacity: 1; transform: translateY(0); } }
+
+        .logo-subtitle {
+            max-width: 900px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            font-size: 1.25rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #5D4328;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSubtitle 1.4s ease-out 0.8s forwards;
+        }
+
+        @keyframes fadeInSubtitle { to { opacity: 0.95; } }
+
+        .category-title, .sub-category-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #4A3723;
+            margin: 40px 0 30px;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .sub-category-title {
+            font-size: 2.4rem;
+            margin: 60px 0 30px;
+        }
+
+        .category-title::after, .sub-category-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 5px;
+            background-color: #8B6B3E;
+            margin: 15px auto 0;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .hero-image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 7px solid #8B6B3E;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.25));
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cafe-menu {
+            max-width: 950px;
+            margin: 0 auto 80px;
+            padding: 0 18px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .cafe-item {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 5px solid #8B6B3E;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeInUp 0.8s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        .cafe-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+        }
+
+        .cafe-item:active {
+            transform: scale(0.97);
+        }
+
+        .cafe-item:nth-child(odd) { animation-delay: 0.15s; }
+        .cafe-item:nth-child(even) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .cafe-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #8B6B3E;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
+
+        .cafe-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cafe-header i {
+            font-size: 1.6rem;
+            color: #F6E8C8;
+            background-color: #8B6B3E;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .cafe-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4A3723;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cafe-name small {
+            display: block;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #6B5020;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .cafe-price {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #4A3723;
+        }
+
+        /* 2 Boutons : Retour Menu + Retour Précédent */
+        .navigation-buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 80px 0 100px;
+            flex-wrap: wrap;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #8B6B3E;
+            color: white;
+            padding: 14px 60px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background: #6B5020;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #4A3723;
+            color: #fdfaf5;
+            padding: 80px 20px 60px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .footer-text { font-size: 1.4rem; font-weight: 300; line-height: 1.6; }
+        .footer-text span { font-size: 1.1rem; opacity: 0.9; display: block; margin-top: 12px; }
+
+        .footer-phone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+        }
+
+        .footer-phone i {
+            font-size: 2rem;
+            color: #F6E8C8;
+            margin-bottom: 10px;
+        }
+
+        .footer-phone strong {
+            color: #F6E8C8;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .social-links a {
+            color: #fdfaf5;
+            font-size: 2.8rem;
+            transition: all 0.4s ease;
+        }
+
+        .social-links a:hover {
+            color: #F6E8C8;
+            transform: scale(1.2);
+        }
+
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+       @media (max-width: 768px) {
+            .category-title { font-size: 2.5rem; }
+            .hero-image { height: 150px; }
+            .cafe-item-img { width: 65px; height: 65px; }
+            .cafe-name { font-size: 1.3rem; }
+            .cafe-price { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .category-title { font-size: 2.2rem; }
+            .hero-image { height: 140px; }
+            .cafe-item-img { width: 60px; height: 60px; }
+            .cafe-name { font-size: 1.25rem; }
+            .cafe-price { font-size: 1.45rem; }
+        }
+
+        @media (max-width: 360px) {
+            .cafe-menu { grid-template-columns: 1fr; padding: 0 14px; }
+            .cafe-item { gap: 12px; }
+            .cafe-header i { font-size: 1.3rem; padding: 6px; }
+        }
+        @media (max-width: 360px) {
+  .cafe-menu {
+    grid-template-columns: 1fr;
+    padding: 0 14px;
+  }
+
+  .cafe-item {
+    gap: 12px;
+  }
+
+  .cafe-header i {
+    font-size: 1.3rem;
+    padding: 6px;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="image/Torre del Oro.png" alt="Torre del Oro">
+        <p class="logo-subtitle">
+            À la Torre del Oro, chaque plat est une pépite.<br>
+            Une cuisine méditerranéenne sublimée, des ingrédients d’exception,<br>
+            et une atmosphère élégante où l’on savoure l’instant.
+        </p>
+    </div>
+
+    <h1 class="category-title">Bouteilles Premium</h1>
+
+    <div class="hero-image-container">
+        <img src="image/les doses.jpg" alt="Nos bouteilles premium" class="hero-image">
+    </div>
+
+    <!-- VODKA -->
+    <h2 class="sub-category-title">Vodka</h2>
+
+    <div class="cafe-menu">
+
+        <div class="cafe-item">
+            <img src="image/Smirnoff Red.jpeg " alt="Smirnoff Red" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Smirnoff Red<br><small>1/2 BTL 120 DT – BTL 220 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Smirnoff Black.webp" alt="Smirnoff Black" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Smirnoff Black<br><small>1/2 BTL 130 DT – BTL 250 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Smirnoff Flavoured.jpg" alt="Smirnoff Flavoured" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Smirnoff Flavoured<br><small>1/2 BTL 130 DT – BTL 250 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Absolut.jpg" alt="Absolut" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Absolut<br><small>1/2 BTL 120 DT – BTL 240 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Belvedere.webp" alt="Belvedere" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Belvedere</div>
+                </div>
+                <div class="cafe-price">500 DT</div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Grey Goose2.jpg" alt="Grey Goose" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Grey Goose<br><small>1/2 BTL 190 DT – BTL 400 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Roberto Cavalli.jpg" alt="Roberto Cavalli" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bottle"></i>
+                    <div class="cafe-name">Roberto Cavalli</div>
+                </div>
+                <div class="cafe-price">500 DT</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- WHISKYS -->
+    <h2 class="sub-category-title">Whiskys</h2>
+
+    <div class="cafe-menu">
+
+        <div class="cafe-item">
+            <img src="image/Ballentines.jpeg" alt="Ballentines" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Ballentines<br><small>1/2 BTL 160 DT – BTL 280 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/J&B.jpeg" alt="J&B" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">J&B<br><small>1/2 BTL 160 DT – BTL 280 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Johnnie Walker Red.webp" alt="Johnnie Walker Red" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Johnnie Walker Red<br><small>1/2 BTL 160 DT – BTL 280 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Johnnie Double Black.jpg" alt="Johnnie Walker Black" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Johnnie Walker Black<br><small>1/2 BTL 220 DT – BTL 380 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Jameson.jpg" alt="Jameson" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Jameson<br><small>1/2 BTL 220 DT – BTL 380 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Chivas" alt="Chivas" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Chivas</div>
+                </div>
+                <div class="cafe-price">500 DT</div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Jack Daniels.webp" alt="Jack Daniels" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Jack Daniels<br><small>1/2 BTL 300 DT – BTL 600 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Grey Goose" alt="Grey Goose" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Grey Goose<br><small>1/2 BTL 190 DT – BTL 400 DT</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cafe-item">
+            <img src="image/Johnnie Walker Black.jpg" alt="Johnnie Double Black" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <div class="cafe-name">Johnnie Double Black</div>
+                </div>
+                <div class="cafe-price">700 DT</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CHAMPAGNE -->
+    <h2 class="sub-category-title">Champagne</h2>
+
+    <div class="cafe-menu">
+
+        <div class="cafe-item">
+            <img src="image/Champagne.webp" alt="Champagne" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-glass-cheers"></i>
+                    <div class="cafe-name">Champagne</div>
+                </div>
+                <div class="cafe-price">450 DT</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 2 Boutons : Retour Menu + Retour Précédent -->
+    <div class="navigation-buttons-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-home"></i> Retour au Menu
+        </a>
+
+        <a href="vin blanc.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Retour
+        </a>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                Merci pour votre fidélité<br>
+                <span>Une expérience unique alliant saveurs authentiques et ambiance chaleureuse</span>
+            </div>
+            <div class="footer-phone">
+                <i class="fas fa-phone-alt"></i>
+                <div><strong>54 800 666</strong></div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100063944715824" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/cafe__andalous/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">© Torre del Oro</div>
+        </div>
+    </footer>
+
+</body>
+</html>

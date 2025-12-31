@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Gold Food</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #F6E8C8;
+            color: #4A3723;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        html {
+            font-size: clamp(14px, 3.5vw, 16px);
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 10px 20px 60px;
+            background-color: #F6E8C8;
+        }
+
+        .logo-container img {
+            width: 420px;
+            max-width: 94vw;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: logoSimpleAppear 1.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        @keyframes logoSimpleAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-subtitle {
+            max-width: 900px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+            font-size: 1.35rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #5D4328;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSubtitle 1.6s ease-out 0.9s forwards;
+        }
+
+        @keyframes fadeInSubtitle {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            color: #4A3723;
+            margin: 20px 0 70px;
+            position: relative;
+        }
+
+        .menu-title::after {
+            content: '';
+            display: block;
+            width: 140px;
+            height: 5px;
+            background-color: #4A3723;
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+
+        .section-tab {
+            display: block;
+            position: relative;
+            margin: 30px auto;
+            max-width: 750px;
+            height: 220px;
+            border-radius: 25px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.5s ease;
+            border: 8px solid #F6E8C8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 160px;
+        }
+
+        .section-tab::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            z-index: 1;
+        }
+
+        .section-tab:active {
+            transform: scale(0.96);
+        }
+
+        .section-tab img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tab-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 100%;
+            padding: 12px;
+        }
+
+        .tab-content i {
+            font-size: 3.2rem;
+            color: #F6E8C8;
+            margin-bottom: 14px;
+            text-shadow: 0 4px 14px rgba(0,0,0,0.9);
+            display: block;
+        }
+
+        .tab-content div {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #4A3723;
+            color: #fdfaf5;
+            padding: 80px 20px 60px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .footer-text { font-size: 1.4rem; font-weight: 300; line-height: 1.6; }
+        .footer-text span { font-size: 1.1rem; opacity: 0.9; display: block; margin-top: 12px; }
+
+        .footer-phone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+        }
+
+        .footer-phone i {
+            font-size: 2rem;
+            color: #F6E8C8;
+            margin-bottom: 10px;
+        }
+
+        .footer-phone strong {
+            color: #F6E8C8;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .social-links a {
+            color: #fdfaf5;
+            font-size: 2.8rem;
+            transition: all 0.4s ease;
+        }
+
+        .social-links a:hover {
+            color: #F6E8C8;
+            transform: scale(1.2);
+        }
+
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-title { font-size: 3.2rem; margin-bottom: 50px; }
+            .section-tab { height: 180px; width: 92vw; border-width: 7px; }
+            .tab-content i { font-size: 2.6rem; }
+            .tab-content div { font-size: 2rem; }
+            .logo-container img { width: 75vw; max-width: 300px; }
+            .logo-subtitle { font-size: 1.15rem; padding: 0 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .menu-title { font-size: 2.6rem; }
+            .section-tab { height: 155px; border-width: 6px; }
+            .tab-content i { font-size: 2.2rem; }
+            .tab-content div { font-size: 1.7rem; }
+            .logo-subtitle { font-size: 1.05rem; }
+        }
+
+        @media (max-width: 360px) {
+            .menu-title { font-size: 2.3rem; }
+            .section-tab { height: 140px; border-width: 5px; margin: 20px auto; }
+            .tab-content i { font-size: 2rem; }
+            .tab-content div { font-size: 1.6rem; letter-spacing: 1px; }
+            .logo-container img { width: 70vw; max-width: 240px; }
+            .logo-subtitle { font-size: 1rem; }
+        }
+        @media (max-width: 360px) {
+  .cafe-menu {
+    grid-template-columns: 1fr;
+    padding: 0 14px;
+  }
+
+  .cafe-item {
+    gap: 12px;
+  }
+
+  .cafe-header i {
+    font-size: 1.3rem;
+    padding: 6px;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="image/Torre del Oro.png " alt="Gold Food">
+        <p class="logo-subtitle">
+    À la Torre del Oro, chaque plat est une pépite.<br>
+    Une cuisine méditerranéenne sublimée, des ingrédients d’exception,<br>
+    et une atmosphère élégante où l’on savoure l’instant.
+</p>
+    </div>
+
+    <h1 class="menu-title">Menu</h1>
+
+
+
+     <a href="les entrées.html" class="section-tab">
+        <img src="image/les entrees.jpg " alt="Les entrées">
+        <div class="tab-content">
+            <i class="fas fa-hamburger"></i>
+            <div>Les entrées</div>
+        </div>
+    </a>
+
+    <!-- Pizza -->
+    <a href="pizza.html" class="section-tab">
+        <img src="image/pizza.jpg" alt="Pizza">
+        <div class="tab-content">
+            <i class="fas fa-pizza-slice"></i>
+            <div>Pizza</div>
+        </div>
+    </a>
+   
+
+    <!-- Plats -->
+    <a href="les plats.html" class="section-tab">
+        <img src="image/Plats.jpg" alt="Plats">
+        <div class="tab-content">
+            <i class="fas fa-plate-wheat"></i>
+            <div>Plats</div>
+        </div>
+    </a>
+
+    <!-- Sandwichs -->
+    <a href="sandwich.html" class="section-tab">
+        <img src="image/sandwish.jpg" alt="Sandwichs">
+        <div class="tab-content">
+            <i class="fas fa-hotdog"></i>
+            <div>Sandwichs</div>
+        </div>
+    </a>
+
+    <!-- Jus & Cocktails -->
+    <a href="jus.html" class="section-tab">
+        <img src="image/les jus et cocktaile.jpg" alt="Jus & Cocktails">
+        <div class="tab-content">
+            <i class="fas fa-cocktail"></i>
+            <div>Jus & Cocktails</div>
+        </div>
+    </a>
+
+    <!-- Boissons -->
+    <a href="boissons.html" class="section-tab">
+        <img src="image/boissons.jpg" alt="Boissons">
+        <div class="tab-content">
+            <i class="fas fa-mug-saucer"></i>
+            <div>Boissons</div>
+        </div>
+    </a>
+
+    <!-- Crêpes -->
+    <a href="crépes.html" class="section-tab">
+        <img src="image/Chaucolat Fruit crepes.jpg" alt="Crêpes">
+        <div class="tab-content">
+            <i class="fas fa-stroopwafel"></i>
+            <div>Crêpes</div>
+        </div>
+    </a>
+
+    <!-- Glaces -->
+    <a href="glasse.html" class="section-tab">
+        <img src="image/les glaces.jpg" alt="Glaces">
+        <div class="tab-content">
+            <i class="fas fa-ice-cream"></i>
+            <div>Glaces</div>
+        </div>
+    </a>
+
+    <!-- Bar à Tapas -->
+    <a href="tapas.html" class="section-tab">
+        <img src="image/bar a tapas.jpg" alt="Tapas">
+        <div class="tab-content">
+            <i class="fas fa-cheese"></i>
+            <div>Bar à Tapas</div>
+        </div>
+    </a>
+
+    <!-- Doses & Bouteilles -->
+    <a href="les doses.html" class="section-tab">
+        <img src="image/les doses.jpg" alt="Doses & Bouteilles">
+        <div class="tab-content">
+            <i class="fas fa-wine-bottle"></i>
+            <div>Doses & Bouteilles</div>
+        </div>
+    </a>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                Merci pour votre fidélité<br>
+                <span>Une expérience unique alliant saveurs authentiques et ambiance chaleureuse</span>
+            </div>
+            <div class="footer-phone">
+                <i class="fas fa-phone-alt"></i>
+                <div><strong>54 800 666</strong></div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100063944715824" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/cafe__andalous/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">© TORRE DEL ORO</div>
+        </div>
+    </footer>
+
+</body>
+</html>

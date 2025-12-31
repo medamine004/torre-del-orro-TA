@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paninis & Makloubs - Torre del Oro</title>
+
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #F6E8C8;
+            color: #4A3723;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        html {
+            font-size: clamp(14px, 3.8vw, 16px);
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 10px 20px 40px;
+            background-color: #F6E8C8;
+        }
+
+        .logo-container img {
+            width: 380px;
+            max-width: 90vw;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+            animation: logoSimpleAppear 1.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes logoSimpleAppear { to { opacity: 1; transform: translateY(0); } }
+
+        .logo-subtitle {
+            max-width: 900px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            font-size: 1.25rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #5D4328;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSubtitle 1.4s ease-out 0.8s forwards;
+        }
+
+        @keyframes fadeInSubtitle { to { opacity: 0.95; } }
+
+        .category-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #4A3723;
+            margin: 40px 0 50px;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .category-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 5px;
+            background-color: #8B6B3E;
+            margin: 15px auto 0;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .hero-image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 7px solid #8B6B3E;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.25));
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cafe-menu {
+            max-width: 950px;
+            margin: 0 auto 80px;
+            padding: 0 18px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .cafe-item {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 5px solid #8B6B3E;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeInUp 0.8s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        .cafe-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+        }
+
+        .cafe-item:active {
+            transform: scale(0.97);
+        }
+
+        .cafe-item:nth-child(odd) { animation-delay: 0.15s; }
+        .cafe-item:nth-child(even) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .cafe-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #8B6B3E;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
+
+        .cafe-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cafe-header i {
+            font-size: 1.6rem;
+            color: #F6E8C8;
+            background-color: #8B6B3E;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .cafe-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4A3723;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cafe-price {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #4A3723;
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin: 80px 0 100px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #8B6B3E;
+            color: white;
+            padding: 14px 60px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background: #6B5020;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+        }
+        .back-button-round {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #F6E8C8;
+    color: #4A3723;
+    border: 4px solid #8B6B3E;
+    padding: 16px 50px;
+    border-radius: 50px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: all 0.4s ease;
+}
+
+.back-button-round:hover {
+    background: #8B6B3E;
+    color: #F6E8C8;
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+             /* Footer */
+        .site-footer {
+            background-color: #4A3723;
+            color: #fdfaf5;
+            padding: 80px 20px 60px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .footer-text { font-size: 1.4rem; font-weight: 300; line-height: 1.6; }
+        .footer-text span { font-size: 1.1rem; opacity: 0.9; display: block; margin-top: 12px; }
+
+        .footer-phone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+        }
+
+        .footer-phone i {
+            font-size: 2rem;
+            color: #F6E8C8;
+            margin-bottom: 10px;
+        }
+
+        .footer-phone strong {
+            color: #F6E8C8;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .social-links a {
+            color: #fdfaf5;
+            font-size: 2.8rem;
+            transition: all 0.4s ease;
+        }
+
+        .social-links a:hover {
+            color: #F6E8C8;
+            transform: scale(1.2);
+        }
+
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .category-title { font-size: 2.5rem; }
+            .hero-image { height: 150px; }
+            .cafe-item-img { width: 65px; height: 65px; }
+            .cafe-name { font-size: 1.3rem; }
+            .cafe-price { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .category-title { font-size: 2.2rem; }
+            .hero-image { height: 140px; }
+            .cafe-item-img { width: 60px; height: 60px; }
+            .cafe-name { font-size: 1.25rem; }
+            .cafe-price { font-size: 1.45rem; }
+        }
+
+        @media (max-width: 360px) {
+            .cafe-menu { grid-template-columns: 1fr; padding: 0 14px; }
+            .cafe-item { gap: 12px; }
+            .cafe-header i { font-size: 1.3rem; padding: 6px; }
+        }
+        @media (max-width: 360px) {
+  .cafe-menu {
+    grid-template-columns: 1fr;
+    padding: 0 14px;
+  }
+
+  .cafe-item {
+    gap: 12px;
+  }
+
+  .cafe-header i {
+    font-size: 1.3rem;
+    padding: 6px;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="image/Torre del Oro.png" alt="Torre del Oro">
+        <p class="logo-subtitle">
+            À la Torre del Oro, chaque plat est une pépite.<br>
+            Une cuisine méditerranéenne sublimée, des ingrédients d’exception,<br>
+            et une atmosphère élégante où l’on savoure l’instant.
+        </p>
+    </div>
+
+    <h1 class="category-title">Paninis & Makloubs</h1>
+
+    <div class="hero-image-container">
+        <img src="image/makloub.jpg" alt="Nos paninis et makloubs" class="hero-image">
+    </div>
+
+    <div class="cafe-menu">
+
+        <!-- Panini au choix -->
+        <div class="cafe-item">
+            <img src="image/Panini au choix.jpg" alt="Panini au choix" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bread-slice"></i>
+                    <div class="cafe-name">Panini au choix</div>
+                </div>
+                <div class="cafe-price">15 DT</div>
+            </div>
+        </div>
+
+        <!-- Makloub chawarma -->
+        <div class="cafe-item">
+            <img src="image/Makloub chawarma.jpg" alt="Makloub chawarma" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-kebab"></i>
+                    <div class="cafe-name">Makloub chawarma</div>
+                </div>
+                <div class="cafe-price">14 DT</div>
+            </div>
+        </div>
+
+    
+
+       
+
+        <!-- Makloub escalope -->
+        <div class="cafe-item">
+            <img src="image/Makloub escalope.jpg" alt="Makloub escalope" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <div class="cafe-name">Makloub escalope</div>
+                </div>
+                <div class="cafe-price">13 DT</div>
+            </div>
+        </div>
+
+        <!-- Makloub thon fromage -->
+        <div class="cafe-item">
+            <img src="image/Makloub thon fromage.jpg" alt="Makloub thon fromage" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-fish"></i>
+                    <div class="cafe-name">Makloub thon fromage</div>
+                </div>
+                <div class="cafe-price">13 DT</div>
+            </div>
+        </div>
+
+        <!-- Makloub jambon -->
+        <div class="cafe-item">
+            <img src="image/Makloub jambon.jpg" alt="Makloub jambon" class="cafe-item-img">
+            <div class="cafe-details">
+                <div class="cafe-header">
+                    <i class="fas fa-bacon"></i>
+                    <div class="cafe-name">Makloub jambon</div>
+                </div>
+                <div class="cafe-price">15 DT</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bouton Retour -->
+    <div class="back-button-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Retour au Menu
+        </a>
+
+        <div class="back-button-container">
+    <a href="sandwich.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Retour
+    </a>
+</div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                Merci pour votre fidélité<br>
+                <span>Une expérience unique alliant saveurs authentiques et ambiance chaleureuse</span>
+            </div>
+            <div class="footer-phone">
+                <i class="fas fa-phone-alt"></i>
+                <div><strong>54 800 666</strong></div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100063944715824" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/cafe__andalous/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">© Torre del Oro</div>
+        </div>
+    </footer>
+
+</body>
+</html>
